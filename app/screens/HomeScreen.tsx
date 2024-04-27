@@ -4,21 +4,14 @@ import Screen from "../components/Screen";
 import { View } from "react-native";
 import Card from "../components/Card";
 import Toggle from "../components/Toggle";
+import ManualMode from "../components/ManualMode";
 
 const HomeScreen = () => {
-  const [toggleIsOn, setToggle] = useState(false);
-
   return (
-    <Screen style={{ paddingHorizontal: 8 }}>
+    <Screen style={{ paddingHorizontal: 8, gap: 22 }}>
       <Text>HomeScreen</Text>
       <Card label="Temperatura" value={30} icon="°C" />
-      <Toggle
-        isOn={toggleIsOn}
-        onToggle={() => {
-          setToggle(!toggleIsOn);
-        }}
-      />
-      {toggleIsOn && <Text>Button is on</Text>}
+      <ManualMode />
     </Screen>
   );
 };
