@@ -17,10 +17,8 @@ export default function ActivityScreen() {
   ];
 
   return (
-    <Screen style={{ paddingHorizontal: 8, gap: 22 }}>
-      <Text style={{ fontSize: 40, letterSpacing: -2, marginBottom: 20 }}>
-        Actividade
-      </Text>
+    <Screen style={styles.screen}>
+      <Text style={styles.text}>Actividade</Text>
       <ScrollView>
         <View style={{ gap: 12 }}>
           {sensors.map((sensor) => (
@@ -37,4 +35,7 @@ export default function ActivityScreen() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: { paddingHorizontal: 8, gap: 22 },
+  text: { fontSize: 40, letterSpacing: -2, marginBottom: 20 },
+});
