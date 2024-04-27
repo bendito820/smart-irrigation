@@ -15,7 +15,7 @@ export default function Card({ label, value, icon }: Props) {
       <View style={styles.separator} />
       <View>
         <Text style={styles.value}>{value}</Text>
-        <Text style={styles.icon}>{icon}</Text>
+        {icon && <Text style={styles.icon}>{icon}</Text>}
       </View>
     </View>
   );
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   separator: {
-    height: 0.4,
-    backgroundColor: "#f2f2f2",
+    height: 1,
+    backgroundColor: "#b3b3b3",
     width: "100%",
   },
 });
