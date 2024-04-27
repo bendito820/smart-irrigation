@@ -1,5 +1,5 @@
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-import React, { Children, PropsWithChildren, ReactNode } from "react";
+import React, { ReactNode } from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props {

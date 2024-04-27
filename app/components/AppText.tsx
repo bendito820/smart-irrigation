@@ -1,11 +1,17 @@
 import React, { ReactNode } from "react";
-import { StyleProp, StyleSheet, Text, ViewStyle } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  ViewStyle,
+  TextStyle,
+} from "react-native";
 
 import { Platform } from "react-native";
 
 interface Props {
   children: ReactNode;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
 }
 
 function AppText({ children, style, ...otherProps }: Props) {
