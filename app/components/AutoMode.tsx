@@ -9,9 +9,7 @@ export default function AutoMode() {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{ width: 28, alignItems: "center", justifyContent: "center" }}
-      >
+      <View style={styles.iconContainer}>
         <MaterialCommunityIcons
           name="autorenew"
           size={toggleIsOn ? 26 : 24}
@@ -44,5 +42,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 22,
   },
+  iconContainer: { width: 28, alignItems: "center", justifyContent: "center" },
   text: { fontSize: 14, letterSpacing: 1 },
 });
