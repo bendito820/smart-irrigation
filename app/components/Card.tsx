@@ -3,8 +3,8 @@ import React from "react";
 import Text from "./AppText";
 
 interface Props {
-  label: string;
-  value: number;
+  label?: string;
+  value?: number;
   icon?: string;
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Text from "../components/AppText";
 import Screen from "../components/Screen";
-import { Pressable, View } from "react-native";
+import { ActivityIndicator, Pressable, View } from "react-native";
 import Card from "../components/Card";
 import Toggle from "../components/Toggle";
 import ManualMode from "../components/ManualMode";
@@ -24,15 +24,17 @@ const HomeScreen = () => {
     queryKey: ["temperature"],
     queryFn: () =>
       axios.get("http://esp8266.local/temperature").then((res) => res.data),
-    staleTime: 20 * 1000, // 1s
+    // staleTime: 20 * 1000, // 1s
   });
-
-  console.log(data);
 
   return (
     <Screen style={{ paddingHorizontal: 8, gap: 22 }}>
       <Text>HomeScreen</Text>
-      <Card label="Temperatura" value={Number(data.temperature)} icon="°C" />
+      {isLoading ? (
+        <ActivityIndicator animating={isLoading} />
+      ) : (
+        <Card label="Temperatura" value={Number(data.temperature)} icon="°C" />
+      )}
       <CountDownTimer />
       <ManualMode />
       <AutoMode />
