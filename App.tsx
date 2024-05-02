@@ -3,14 +3,15 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import AppNavigator from "./app/navigators/AppNavigator";
+import QueryClientProvider from "./app/QueryClientProvider";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <AppNavigator />
-      {/* <View style={styles.container}>
-      </View> */}
-      <StatusBar style="inverted" />
+      <QueryClientProvider>
+        <AppNavigator />
+        <StatusBar style="inverted" />
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }

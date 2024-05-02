@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Text from "../components/AppText";
 import Screen from "../components/Screen";
 import { Pressable, View } from "react-native";
@@ -8,12 +8,31 @@ import ManualMode from "../components/ManualMode";
 import AutoMode from "../components/AutoMode";
 import CountDownTimer from "../components/CountDownTimer";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import useApi from "../hooks/useApi";
 
 const HomeScreen = () => {
+  const [render, setRender] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRender(!render);
+    }, 10 * 1000);
+  }, [render]);
+
+  const { data, error, isLoading } = useQuery<any>({
+    queryKey: ["temperature"],
+    queryFn: () =>
+      axios.get("http://esp8266.local/temperature").then((res) => res.data),
+    staleTime: 20 * 1000, // 1s
+  });
+
+  console.log(data);
+
   return (
     <Screen style={{ paddingHorizontal: 8, gap: 22 }}>
       <Text>HomeScreen</Text>
-      <Card label="Temperatura" value={30} icon="°C" />
+      <Card label="Temperatura" value={Number(data.temperature)} icon="°C" />
       <CountDownTimer />
       <ManualMode />
       <AutoMode />
