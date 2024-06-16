@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from "react";
-import Text from "../components/AppText";
-import Screen from "../components/Screen";
-import { ActivityIndicator, Pressable, View } from "react-native";
-import Card from "../components/Card";
-import Toggle from "../components/Toggle";
-import ManualMode from "../components/ManualMode";
-import AutoMode from "../components/AutoMode";
-import CountDownTimer from "../components/CountDownTimer";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import useApi from "../hooks/useApi";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Pressable } from "react-native";
+import Text from "../components/AppText";
+import AutoMode from "../components/AutoMode";
+import Card from "../components/Card";
+import CountDownTimer from "../components/CountDownTimer";
+import ManualMode from "../components/ManualMode";
+import Screen from "../components/Screen";
 
 const HomeScreen = () => {
   const [render, setRender] = useState(false);
+  const [data, setData] = useState<any>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setRender(!render);
-    }, 10 * 1000);
+    }, 1 * 1000);
   }, [render]);
 
-  const { data, error, isLoading } = useQuery<any>({
-    queryKey: ["temperature"],
-    queryFn: () =>
-      axios.get("http://esp8266.local/temperature").then((res) => res.data),
-    // staleTime: 20 * 1000, // 1s
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get("http://esp8266.local/sensor");
+      setIsLoading(false);
+      setData(res.data);
+    };
+    getData();
+
+    setInterval(() => {
+      getData();
+    }, 10 * 1000);
+  }, []);
 
   return (
     <Screen style={{ paddingHorizontal: 8, gap: 22 }}>
@@ -33,7 +38,7 @@ const HomeScreen = () => {
       {isLoading ? (
         <ActivityIndicator animating={isLoading} />
       ) : (
-        <Card label="Temperatura" value={Number(data.temperature)} icon="°C" />
+        <Card label="Temperatura" value={Number(data?.temperature)} icon="°C" />
       )}
       <CountDownTimer />
       <ManualMode />
