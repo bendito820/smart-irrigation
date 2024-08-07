@@ -1,8 +1,11 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ActivityScreen from "../screens/ActivityScreen";
+
 import HomeScreen from "../screens/HomeScreen";
+import ActivityScreen from "../screens/ActivityScreen";
+import SettingsNavigator from "./SettingsNavigator";
+
 import SettingsScreen from "../screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
@@ -68,7 +71,7 @@ const AppNavigator = () => {
           ),
         }}
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsNavigator}
       />
     </Tab.Navigator>
   );
